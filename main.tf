@@ -1,3 +1,20 @@
+# Correcao primeira issue
+resource "aws_flow_log" "example" {
+  log_destination      = "arn:aws:s3:::terraform-state-gustavo-angelis-clc16-211125440922-us-east-1-an"
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+  vpc_id               = aws_vpc.clc_vpc.id
+}
+
+# Correcao segunda issue
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_vpc.clc_vpc.id
+  
+  tags = {
+    Name = "${var.vpc_name}-default-sg"
+  }
+}
+
 # Cria a VPC
 resource "aws_vpc" "clc_vpc" {
   cidr_block       = "172.16.0.0/16"
